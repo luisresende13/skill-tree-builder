@@ -1,9 +1,47 @@
 import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
+import { z } from 'zod';
 import { SkillCategory } from '../types';
 import { SYSTEM_PROMPT, RESPONSE_SCHEMA } from '../constants';
 
+// --- Custom Error Classes ---
+export class ApiKeyError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'ApiKeyError';
+  }
+}
+
+export class ValidationError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'ValidationError';
+  }
+}
+
+export class ApiError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'ApiError';
+  }
+}
+
+// --- Zod Schema for Validation ---
+const SkillSchema = z.object({
+  name: z.string(),
+  description: z.string(),
+  prerequisite: z.string(),
+});
+
+const SkillCategorySchema = z.object({
+  category: z.string(),
+  skills: z.array(SkillSchema),
+});
+
+// --- API Key Validation ---
 if (!process.env.API_KEY) {
-  throw new Error("API_KEY environment variable not set");
+  throw new ApiKeyError(
+    "The GEMINI_API_KEY environment variable is not set. Please create a `.env` file in the root of the project and add your API key."
+  );
 }
 
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
@@ -24,19 +62,22 @@ export async function getNextSkills(domain: string, knownSkills: string[], exist
     });
 
     const jsonText = response.text.trim();
-    const parsedResponse: SkillCategory = JSON.parse(jsonText);
-    
-    // Basic validation
-    if (!parsedResponse.category || !Array.isArray(parsedResponse.skills)) {
-      throw new Error('Invalid JSON structure received from API');
+    const parsedJson = JSON.parse(jsonText);
+
+    // Validate with Zod
+    const validationResult = SkillCategorySchema.safeParse(parsedJson);
+    if (!validationResult.success) {
+      console.error("Zod validation error:", validationResult.error.issues);
+      throw new ValidationError("Invalid data structure received from the API.");
     }
-    
-    return parsedResponse;
+
+    return validationResult.data;
   } catch (error) {
-    console.error("Error calling Gemini API:", error);
-    if (error instanceof Error) {
-        console.error("Error message:", error.message);
+    console.error("Error in getNextSkills:", error);
+    if (error instanceof ApiKeyError || error instanceof ValidationError) {
+      throw error; // Re-throw custom errors directly
     }
-    throw new Error("Failed to get a valid response from the AI assistant.");
+    // Wrap other errors in a generic ApiError
+    throw new ApiError("Failed to get a valid response from the AI assistant.");
   }
 }
