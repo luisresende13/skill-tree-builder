@@ -1,4 +1,4 @@
-import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
+import { GoogleGenAI, GenerateContentResponse } from '@google/genai';
 import { z } from 'zod';
 import { SkillCategory } from '../types';
 import { SYSTEM_PROMPT, RESPONSE_SCHEMA } from '../constants';
@@ -40,13 +40,17 @@ const SkillCategorySchema = z.object({
 // --- API Key Validation ---
 if (!process.env.API_KEY) {
   throw new ApiKeyError(
-    "The GEMINI_API_KEY environment variable is not set. Please create a `.env` file in the root of the project and add your API key."
+    'The GEMINI_API_KEY environment variable is not set. Please create a `.env` file in the root of the project and add your API key.',
   );
 }
 
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
-export async function getNextSkills(domain: string, knownSkills: string[], existingSkills: string[]): Promise<SkillCategory> {
+export async function getNextSkills(
+  domain: string,
+  knownSkills: string[],
+  existingSkills: string[],
+): Promise<SkillCategory> {
   const userPrompt = `Domain: "${domain}"\nKnown Skills: [${knownSkills.join(', ')}]\nExisting Skills in Tree: [${existingSkills.join(', ')}]`;
 
   try {
@@ -67,17 +71,19 @@ export async function getNextSkills(domain: string, knownSkills: string[], exist
     // Validate with Zod
     const validationResult = SkillCategorySchema.safeParse(parsedJson);
     if (!validationResult.success) {
-      console.error("Zod validation error:", validationResult.error.issues);
-      throw new ValidationError("Invalid data structure received from the API.");
+      console.error('Zod validation error:', validationResult.error.issues);
+      throw new ValidationError(
+        'Invalid data structure received from the API.',
+      );
     }
 
     return validationResult.data;
   } catch (error) {
-    console.error("Error in getNextSkills:", error);
+    console.error('Error in getNextSkills:', error);
     if (error instanceof ApiKeyError || error instanceof ValidationError) {
       throw error; // Re-throw custom errors directly
     }
     // Wrap other errors in a generic ApiError
-    throw new ApiError("Failed to get a valid response from the AI assistant.");
+    throw new ApiError('Failed to get a valid response from the AI assistant.');
   }
 }

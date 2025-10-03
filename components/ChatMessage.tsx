@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ChatMessageData, ChecklistData } from '../types';
 import Checklist from './Checklist';
@@ -13,7 +12,13 @@ interface ChatMessageProps {
   isLoading: boolean;
 }
 
-const ChatMessage: React.FC<ChatMessageProps> = ({ message, isLastModelMessage, currentChecklist, onChecklistChange, isLoading }) => {
+const ChatMessage: React.FC<ChatMessageProps> = ({
+  message,
+  isLastModelMessage,
+  currentChecklist,
+  onChecklistChange,
+  isLoading,
+}) => {
   const isUser = message.role === 'user';
 
   if (isUser) {
@@ -23,7 +28,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, isLastModelMessage, 
           <p className="text-white whitespace-pre-wrap">{message.text}</p>
         </div>
         <div className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center">
-            <UserIcon />
+          <UserIcon />
         </div>
       </div>
     );

@@ -9,7 +9,11 @@ interface SkillSelectorProps {
   isLoading: boolean;
 }
 
-const SkillSelector: React.FC<SkillSelectorProps> = ({ category, onConfirm, isLoading }) => {
+const SkillSelector: React.FC<SkillSelectorProps> = ({
+  category,
+  onConfirm,
+  isLoading,
+}) => {
   const [selected, setSelected] = useState<Set<string>>(new Set());
 
   const handleSelect = (skillName: string) => {
@@ -31,10 +35,13 @@ const SkillSelector: React.FC<SkillSelectorProps> = ({ category, onConfirm, isLo
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-white">Choose Your Skills</h2>
-        <p className="text-slate-400 mt-1">Select the skills you already know from the "{category.category}" category.</p>
+        <p className="text-slate-400 mt-1">
+          {`Select the skills you already know from the "${category.category}"`}
+          category.
+        </p>
       </div>
       <div className="space-y-3">
-        {category.skills.map(skill => (
+        {category.skills.map((skill) => (
           <SkillCard
             key={skill.name}
             skill={skill}

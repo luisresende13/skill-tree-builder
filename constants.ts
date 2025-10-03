@@ -1,55 +1,55 @@
 import { Type } from '@google/genai';
 
 export const DOMAIN_CATEGORIES = {
-  "Software & Web": [
-    "Frontend Development",
-    "Backend Development",
-    "Full-Stack Development",
-    "DevOps & Cloud Infrastructure",
-    "Mobile Development (iOS & Android)",
-    "Game Development",
-    "Cybersecurity",
-    "Blockchain & Web3",
-    "UI/UX Design",
-    "WordPress Development",
-    "Shopify Development",
+  'Software & Web': [
+    'Frontend Development',
+    'Backend Development',
+    'Full-Stack Development',
+    'DevOps & Cloud Infrastructure',
+    'Mobile Development (iOS & Android)',
+    'Game Development',
+    'Cybersecurity',
+    'Blockchain & Web3',
+    'UI/UX Design',
+    'WordPress Development',
+    'Shopify Development',
   ],
-  "Data & AI": [
-    "Data Science",
-    "Machine Learning Engineering",
-    "Artificial Intelligence Research",
-    "Data Engineering",
-    "Data Analytics",
-    "Big Data Technologies",
-    "Business Intelligence",
-    "Natural Language Processing (NLP)",
+  'Data & AI': [
+    'Data Science',
+    'Machine Learning Engineering',
+    'Artificial Intelligence Research',
+    'Data Engineering',
+    'Data Analytics',
+    'Big Data Technologies',
+    'Business Intelligence',
+    'Natural Language Processing (NLP)',
   ],
-  "Creative & Design": [
-    "Graphic Design",
-    "3D Modeling & Animation",
-    "Video Editing & Production",
-    "Motion Graphics",
-    "Music Production",
-    "Creative Writing",
-    "Photography",
+  'Creative & Design': [
+    'Graphic Design',
+    '3D Modeling & Animation',
+    'Video Editing & Production',
+    'Motion Graphics',
+    'Music Production',
+    'Creative Writing',
+    'Photography',
   ],
-  "Business & Marketing": [
-    "Digital Marketing",
-    "Search Engine Optimization (SEO)",
-    "Content Marketing",
-    "Social Media Management",
-    "Product Management",
-    "Agile & Scrum Methodologies",
-    "Project Management",
-    "Financial Analysis",
+  'Business & Marketing': [
+    'Digital Marketing',
+    'Search Engine Optimization (SEO)',
+    'Content Marketing',
+    'Social Media Management',
+    'Product Management',
+    'Agile & Scrum Methodologies',
+    'Project Management',
+    'Financial Analysis',
   ],
-  "Hardware & Systems": [
-      "Embedded Systems",
-      "IoT (Internet of Things)",
-      "Robotics",
-      "Network Administration",
-      "System Administration (Linux/Windows)",
-  ]
+  'Hardware & Systems': [
+    'Embedded Systems',
+    'IoT (Internet of Things)',
+    'Robotics',
+    'Network Administration',
+    'System Administration (Linux/Windows)',
+  ],
 };
 
 export const SYSTEM_PROMPT = `You are a Skill Tree Architect AI. Your purpose is to help users build a visual map of their technical skills. Given a technology domain and lists of skills the user knows and skills already in the tree, you must identify the next logical set of skills to learn.
@@ -67,11 +67,12 @@ export const RESPONSE_SCHEMA = {
   properties: {
     category: {
       type: Type.STRING,
-      description: "Name of the new skill category (e.g., 'JavaScript Frameworks').",
+      description:
+        "Name of the new skill category (e.g., 'JavaScript Frameworks').",
     },
     skills: {
       type: Type.ARRAY,
-      description: "A list of skills in this category.",
+      description: 'A list of skills in this category.',
       items: {
         type: Type.OBJECT,
         properties: {
@@ -81,11 +82,12 @@ export const RESPONSE_SCHEMA = {
           },
           description: {
             type: Type.STRING,
-            description: "A brief, one-sentence description of the skill.",
+            description: 'A brief, one-sentence description of the skill.',
           },
           prerequisite: {
             type: Type.STRING,
-            description: "The skill from the user's known list that this new skill builds upon (e.g., 'JavaScript').",
+            description:
+              "The skill from the user's known list that this new skill builds upon (e.g., 'JavaScript').",
           },
         },
         required: ['name', 'description', 'prerequisite'],

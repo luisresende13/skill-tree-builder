@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { SendIcon } from './icons/SendIcon';
 
@@ -24,7 +23,9 @@ const InputBar: React.FC<InputBarProps> = ({ onSendMessage, isLoading }) => {
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        placeholder={isLoading ? "Waiting for response..." : "Type your answer here..."}
+        placeholder={
+          isLoading ? 'Waiting for response...' : 'Type your answer here...'
+        }
         disabled={isLoading}
         className="flex-1 bg-slate-800 border border-slate-600 rounded-lg p-3 text-white placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-200"
       />

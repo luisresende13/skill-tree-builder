@@ -16,12 +16,14 @@ const LearningPath: React.FC<LearningPathProps> = ({ skills }) => {
       </h2>
       {skills.length > 0 ? (
         <div className="space-y-3">
-          {skills.map(skill => (
+          {skills.map((skill) => (
             <SkillCard key={skill.name} skill={skill} variant="learning" />
           ))}
         </div>
       ) : (
-        <p className="text-sm text-slate-500 italic">Your path will be revealed as you make selections.</p>
+        <p className="text-sm text-slate-500 italic">
+          Your path will be revealed as you make selections.
+        </p>
       )}
     </div>
   );

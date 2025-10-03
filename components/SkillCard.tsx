@@ -10,7 +10,12 @@ type SkillCardProps = {
   onClick?: () => void;
 };
 
-const SkillCard: React.FC<SkillCardProps> = ({ skill, variant = 'selectable', isSelected = false, onClick }) => {
+const SkillCard: React.FC<SkillCardProps> = ({
+  skill,
+  variant = 'selectable',
+  isSelected = false,
+  onClick,
+}) => {
   const baseClasses = 'p-4 rounded-lg border-2 transition-all duration-200';
   const variantClasses = {
     selectable: `bg-slate-800/50 border-slate-700 hover:border-emerald-500 hover:bg-slate-800 ${isSelected ? '!border-emerald-500 !bg-emerald-900/30' : ''} ${onClick ? 'cursor-pointer' : ''}`,
@@ -27,14 +32,19 @@ const SkillCard: React.FC<SkillCardProps> = ({ skill, variant = 'selectable', is
   };
 
   return (
-    <div className={`${baseClasses} ${variantClasses[variant]}`} onClick={onClick}>
+    <div
+      className={`${baseClasses} ${variantClasses[variant]}`}
+      onClick={onClick}
+    >
       <div className="flex justify-between items-start">
         <div>
           <h3 className="font-bold text-white">{skill.name}</h3>
           <p className="text-sm text-slate-400 mt-1">{skill.description}</p>
         </div>
         {variant === 'selectable' && (
-          <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ml-4 ${isSelected ? 'bg-emerald-500 text-white' : 'bg-slate-700 text-slate-400'}`}>
+          <div
+            className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ml-4 ${isSelected ? 'bg-emerald-500 text-white' : 'bg-slate-700 text-slate-400'}`}
+          >
             {icon[variant]}
           </div>
         )}

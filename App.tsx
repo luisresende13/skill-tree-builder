@@ -66,8 +66,13 @@ const MainApp = ({ domain }: { domain: string }) => {
           )}
           {isComplete && (
             <div className="text-center p-8 bg-slate-800/50 rounded-lg">
-              <h2 className="text-2xl font-bold text-green-400">Congratulations!</h2>
-              <p className="mt-2 text-slate-400">You've explored the main branches of this skill tree. Check your Learning Path for next steps!</p>
+              <h2 className="text-2xl font-bold text-green-400">
+                Congratulations!
+              </h2>
+              <p className="mt-2 text-slate-400">
+                You&apos;ve explored the main branches of this skill tree. Check your
+                Learning Path for next steps!
+              </p>
             </div>
           )}
         </aside>
