@@ -1,0 +1,71 @@
+<best_practices>
+  <general_principles>
+    <principle priority="high">
+      <name>Atomicity</name>
+      <description>Each ticket should represent a single, well-defined piece of work.</description>
+      <rationale>Atomic tickets are easier to understand, estimate, and complete. Avoid creating large, vague tickets that cover multiple unrelated tasks.</rationale>
+      <example>
+        <scenario>Found a component with no tests and a typo in the documentation.</scenario>
+        <good>Create two separate tickets: one for "Write unit tests for SkillCard component" and another for "Fix typo in SkillCard documentation".</good>
+        <bad>Create one ticket titled "Fix SkillCard component".</bad>
+      </example>
+    </principle>
+    <principle priority="medium">
+      <name>Clarity and Detail</name>
+      <description>Tickets must be clear, concise, and provide enough detail for a developer to start working on them.</description>
+      <rationale>Well-defined tickets reduce ambiguity and back-and-forth communication.</rationale>
+    </principle>
+  </general_principles>
+
+  <ticket_structure_conventions>
+    <convention category="title">
+      <rule>Use a clear, action-oriented title. Start with a verb.</rule>
+      <examples>
+        <good>Refactor `geminiService` to handle API errors gracefully</good>
+        <bad>`geminiService` errors</bad>
+      </examples>
+    </convention>
+    
+    <convention category="description">
+      <rule>Provide context for the ticket. Explain the "what" and "why".</rule>
+      <template>
+        **Description**
+        A clear explanation of the task, bug, or feature.
+        
+        **Context**
+        Why this ticket is necessary. What is the current behavior and what should the new behavior be?
+      </template>
+    </convention>
+
+    <convention category="acceptance_criteria">
+      <rule>List clear, testable acceptance criteria.</rule>
+      <template>
+        **Acceptance Criteria**
+        - [ ] Criterion 1
+        - [ ] Criterion 2
+        - [ ] Criterion 3
+      </template>
+    </convention>
+
+    <convention category="labels">
+      <rule>Use labels to categorize tickets.</rule>
+      <examples>
+        <good>`bug`, `feature`, `tech-debt`, `component:SkillTree`, `service:api`</good>
+      </examples>
+    </convention>
+  </ticket_structure_conventions>
+
+  <quality_checklist>
+    <category name="before_creating_ticket">
+      <item>Is this a single, actionable piece of work?</item>
+      <item>Is the scope clear?</item>
+      <item>Do I have enough information to write a clear description?</item>
+    </category>
+    <category name="after_creating_ticket">
+      <item>Is the title action-oriented?</item>
+      <item>Is the description clear and concise?</item>
+      <item>Are the acceptance criteria testable?</item>
+      <item>Are the labels appropriate?</item>
+    </category>
+  </quality_checklist>
+</best_practices>

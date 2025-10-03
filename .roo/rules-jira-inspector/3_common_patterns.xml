@@ -1,0 +1,93 @@
+<common_ticket_patterns>
+  <overview>
+    This file provides templates for common types of Jira tickets that should be generated when inspecting the codebase.
+  </overview>
+
+  <pattern name="feature">
+    <description>For suggesting a new feature or enhancement.</description>
+    <template><![CDATA[
+---
+title: "Feature: Implement user authentication"
+labels: [feature, authentication, epic:user-management]
+---
+
+**Description**
+Currently, the application does not have user authentication. This feature will add a simple email/password login system.
+
+**Acceptance Criteria**
+- [ ] A user can sign up with an email and password.
+- [ ] A user can log in with their credentials.
+- [ ] A logged-in user can see their email on the profile page.
+- [ ] A user can log out.
+    ]]></template>
+  </pattern>
+
+  <pattern name="bug">
+    <description>For reporting a bug or unexpected behavior.</description>
+    <template><![CDATA[
+---
+title: "Bug: Skill card selection state is not cleared on new search"
+labels: [bug, component:SkillSelector]
+---
+
+**Description**
+When a user selects a skill and then performs a new search, the previously selected skill card remains highlighted, which is confusing.
+
+**Steps to Reproduce**
+1. Select a skill from the list.
+2. The skill card becomes highlighted.
+3. Perform a new search for a different skill.
+4. The old skill card is still highlighted in the new search results.
+
+**Expected Behavior**
+The selection state should be cleared whenever a new search is initiated.
+
+**Acceptance Criteria**
+- [ ] When a new search is performed, any previously selected skill card is deselected.
+    ]]></template>
+  </pattern>
+
+  <pattern name="chore_refactor">
+    <description>For refactoring or improving existing code without changing functionality.</description>
+    <template><![CDATA[
+---
+title: "Chore: Refactor `useSkillTree` hook to use Redux Toolkit"
+labels: [chore, refactor, tech-debt, hook:useSkillTree]
+---
+
+**Description**
+The `useSkillTree` hook manages complex state logic that could be simplified and made more robust by using Redux Toolkit for state management.
+
+**Tasks**
+- [ ] Create a new Redux slice for the skill tree state.
+- [ ] Replace `useState` and `useEffect` logic in `useSkillTree` with selectors and dispatchers.
+- [ ] Ensure all components using the hook still function as expected.
+
+**Acceptance Criteria**
+- [ ] The `useSkillTree` hook is refactored to use Redux Toolkit.
+- [ ] There are no regressions in the skill tree functionality.
+- [ ] The state logic is decoupled from the hook.
+    ]]></template>
+  </pattern>
+
+  <pattern name="tech_debt_documentation">
+    <description>For addressing technical debt, such as missing documentation or tests.</description>
+    <template><![CDATA[
+---
+title: "Tech Debt: Add JSDoc documentation to `geminiService.ts`"
+labels: [tech-debt, documentation, service:gemini]
+---
+
+**Description**
+The `geminiService.ts` file contains critical logic for interacting with the Gemini API but lacks any inline documentation, making it difficult to understand and maintain.
+
+**Tasks**
+- [ ] Add a file-level overview comment explaining the service's purpose.
+- [ ] Add JSDoc blocks to all public functions, explaining their purpose, parameters, and return values.
+
+**Acceptance Criteria**
+- [ ] All public functions in `geminiService.ts` are fully documented with JSDoc.
+- [ ] The documentation is clear and accurately describes the code.
+    ]]></template>
+  </pattern>
+</common_ticket_patterns>

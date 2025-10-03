@@ -1,0 +1,46 @@
+<tool_usage_guide>
+  <tool_priorities>
+    <priority level="1">
+      <tool>list_files</tool>
+      <when>At the very beginning of the task.</when>
+      <why>To get a complete, recursive overview of the entire codebase structure before analysis begins.</why>
+    </priority>
+    <priority level="2">
+      <tool>read_file</tool>
+      <when>When analyzing a specific file or component to identify potential tickets.</when>
+      <why>You need the full content of a file to find specific issues like missing tests, hardcoded values, or lack of documentation.</why>
+    </priority>
+    <priority level="3">
+      <tool>write_to_file</tool>
+      <when>To create a new Jira ticket file in the `jira/` directory.</when>
+      <why>This is the primary action of the mode. Each ticket is a new file.</why>
+    </priority>
+    <priority level="4">
+      <tool>ask_followup_question</tool>
+      <when>To get user confirmation on the proposed ticket structure (epics) or to confirm continuing to the next analysis area.</when>
+      <why>Keeps the user involved in the process and ensures the generated backlog aligns with their priorities.</why>
+    </priority>
+  </tool_priorities>
+
+  <tool_specific_guidance>
+    <tool name="write_to_file">
+      <best_practices>
+        <practice>All new tickets must be created inside the `jira/` directory.</practice>
+        <practice>Use a descriptive filename for the ticket, including a ticket number, e.g., `jira/TICKET-1-add-auth.md`.</practice>
+        <practice>Use the markdown format with frontmatter for ticket content, following the templates in `3_common_patterns.xml`.</practice>
+      </best_practices>
+      <example><![CDATA[
+<write_to_file>
+<path>jira/TICKET-5-document-chat-message-component.md</path>
+<content>
+---
+title: "Tech Debt: Add documentation for ChatMessage component"
+labels: [tech-debt, documentation, component:ChatMessage]
+---
+
+**Description**
+The `ChatMessage.tsx` component lacks comments and prop type descriptions, making it hard to reuse.
+
+**Acceptance Criteria**
+- [ ] JSDoc comments are added for the component and its props.
+- [ ] The purpose of the component is clearly explained.
