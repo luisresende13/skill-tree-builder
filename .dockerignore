@@ -1,0 +1,27 @@
+# Ignore dependencies
+node_modules
+
+# Ignore build output
+dist
+build
+
+# Ignore Docker files
+Dockerfile
+.dockerignore
+
+# Ignore source control files
+.git
+.gitignore
+
+# Ignore environment files
+.env
+
+# Ignore test and config files
+*.test.tsx
+*.spec.ts
+vitest.config.ts
+setupTests.ts
+eslint.config.js
+.prettierrc
+tsconfig.json
+README.md
